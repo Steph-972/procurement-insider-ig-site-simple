@@ -2,43 +2,60 @@
 <html lang="fr"><head>
   <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Bienvenue d’Instagram</title>
-  <link rel="stylesheet" href="/styles.css">
+  <style>
+    body{font-family:system-ui,Arial,sans-serif;margin:0;padding:20px;background:#fff;color:#1A1A1A}
+    .card{max-width:560px;margin:20px auto;border:1px solid #e6e6e9;border-radius:12px;padding:16px}
+    h1{margin:0;text-align:center}
+    label{display:block;margin:10px 0}
+    input[type="email"]{width:100%;padding:10px;border:1px solid #ddd;border-radius:10px}
+    .btn{display:block;width:100%;text-align:center;margin-top:12px;padding:14px;border-radius:12px;border:0;background:#1D3557;color:#fff;font-weight:700}
+    .note{background:#f5f7fa;padding:8px;border-radius:8px;margin-top:8px}
+  </style>
 </head><body>
-  <main class="container">
-    <section class="hero"><h1>Bienvenue 👋</h1>
-      <p>Ressources clés pour optimiser vos achats et appels d’offres.</p></section>
+  <h1>Bienvenue 👋</h1>
 
-    <section class="grid grid--3" aria-label="Liens rapides">
-      <a class="card" href="/ressources?utm_source=instagram&utm_medium=bio">📖 Derniers articles</a>
-      <a class="card" href="/expertises?utm_source=instagram&utm_medium=bio">🎯 Nos expertises</a>
-      <a class="card" href="#contact">🤝 Prendre RDV</a>
-    </section>
+  <div class="card">
+    <h2>📩 Restez informé</h2>
+    <p>Recevez nos guides et analyses directement par mail.</p>
 
-    <section class="card" style="margin-top:20px;max-width:560px">
-      <h2>📩 Restez informé</h2>
-      <p>Recevez nos guides et analyses directement par mail.</p>
+    <!-- FORMULAIRE NEWSLETTER (Brevo listId=10) -->
+    <form id="ig-sub" action="/api/subscribe" method="post" novalidate>
+      <label>Email<br>
+        <input name="email" type="email" required aria-required="true" autocomplete="email">
+      </label>
 
-      <!-- ⬇️ FORMULAIRE NEWSLETTER (Brevo listId=10) -->
-      <form id="ig-sub" action="/api/subscribe" method="post" novalidate>
-        <label>Email<br>
-          <input name="email" type="email" required aria-required="true" autocomplete="email"
-                 style="width:100%;padding:10px;border:1px solid #ddd;border-radius:10px">
-        </label>
-        <input type="hidden" name="listId" value="10">
+      <input type="hidden" name="listId" value="10">
 
-        <!-- Consentement RGPD (case à cocher) -->
-        <label style="display:flex;gap:8px;align-items:flex-start;margin:10px 0">
-          <input type="checkbox" name="consent" required aria-required="true">
-          <span>J’accepte de recevoir des emails. J’ai lu la
-            <a href="/politique-confidentialite" target="_blank" rel="noopener">politique de confidentialité</a>.
-          </span>
-        </label>
+      <!-- Consentement RGPD -->
+      <label style="display:flex;gap:8px;align-items:flex-start;margin:10px 0">
+        <input type="checkbox" name="consent" required aria-required="true">
+        <span>J’accepte de recevoir des emails. J’ai lu la
+          <a href="/politique-confidentialite" target="_blank" rel="noopener">politique de confidentialité</a>.
+        </span>
+      </label>
 
-        <!-- BOUTON S’ABONNER -->
-        <button class="btn" type="submit">S’abonner</button>
-        <p id="ig-sub-msg" role="status" style="margin-top:8px"></p>
-      </form>
-    </section>
-  </main>
-  <script src="/script.js" defer></script>
+      <!-- BOUTON S’ABONNER -->
+      <button class="btn" type="submit">S’abonner</button>
+      <p id="ig-sub-msg" class="note" role="status"></p>
+    </form>
+  </div>
+
+  <script>
+    // Envoi du formulaire (affiche un message sous le bouton)
+    document.getElementById('ig-sub').addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const msg = document.getElementById('ig-sub-msg');
+      msg.textContent = 'Envoi en cours…';
+      const fd = new FormData(e.target), body = Object.fromEntries(fd.entries());
+      try{
+        const r = await fetch('/api/subscribe',{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify(body)
+        });
+        if(r.ok){ msg.textContent = 'Merci ! Vérifiez votre email pour confirmer.'; e.target.reset(); }
+        else{ msg.textContent = 'Impossible de traiter votre demande.'; }
+      }catch(err){ msg.textContent = 'Erreur réseau. Réessayez.'; }
+    });
+  </script>
 </body></html>
