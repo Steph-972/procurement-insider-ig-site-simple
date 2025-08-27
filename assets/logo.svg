@@ -1,6 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="180" height="36" viewBox="0 0 180 36">
-  <rect width="180" height="36" rx="6" fill="#1D3557"/>
-  <circle cx="18" cy="18" r="10" fill="#06D6A0"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="36" viewBox="0 0 300 36" role="img" aria-label="Procurement Insider">
+  <defs>
+    <style>
+      .bg{fill:#1D3557}
+      .accent{fill:#06D6A0}
+      .label{fill:#fff;font:700 16px/1 'Inter','Arial',sans-serif}
+    </style>
+  </defs>
+
+  <!-- Fond plus long pour couvrir tout le texte -->
+  <rect class="bg" x="0" y="0" width="300" height="36" rx="6"/>
+
+  <!-- Pictogramme œil/flèche -->
+  <circle class="accent" cx="18" cy="18" r="10"/>
   <path d="M18 10 L22 18 L14 18 Z" fill="#1D3557"/>
-  <text x="40" y="23" font-family="Arial, sans-serif" font-size="16" fill="#FFFFFF">Procurement Insider</text>
+
+  <!-- Libellé : décalé pour ne pas toucher l'icône -->
+  <text class="label" x="44" y="23">Procurement Insider</text>
 </svg>
