@@ -16,13 +16,17 @@
       <a class="ig-btn" href="/guides?utm_source=instagram&utm_medium=bio">📚 Modèles & guides</a>
       <a class="ig-btn ig-btn--outline" href="/newsletter?utm_source=instagram&utm_medium=bio">📩 S’abonner</a>
     </nav>
+
     <section class="card" style="margin-top:20px;max-width:560px">
       <h2>Inscription newsletter</h2>
       <form id="ig-sub-mobile" action="/api/subscribe" method="post" novalidate>
-        <label>Email<br><input name="email" type="email" required style="width:100%;padding:10px;border:1px solid #ddd;border-radius:10px"></label>
+        <label>Email<br>
+          <input name="email" type="email" required aria-required="true" autocomplete="email"
+                 style="width:100%;padding:10px;border:1px solid #ddd;border-radius:10px">
+        </label>
         <input type="hidden" name="listId" value="10">
         <label style="display:flex;gap:8px;align-items:flex-start;margin:10px 0">
-          <input type="checkbox" name="consent" required>
+          <input type="checkbox" name="consent" required aria-required="true">
           <span>J’accepte de recevoir des emails. <a href="/politique-confidentialite" target="_blank" rel="noopener">Politique de confidentialité</a>.</span>
         </label>
         <button class="btn" type="submit">S’abonner</button>
