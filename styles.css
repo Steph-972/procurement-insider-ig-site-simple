@@ -26,6 +26,7 @@ html,body{margin:0;padding:0;background:var(--pi-bg);color:var(--pi-text);font-f
 @media(max-width:780px){.grid--3{grid-template-columns:1fr}.hero{padding:40px 0}}
 /* Titres centrés pour les sections de la home */
 #expertises h2,
-#ressources h2 {
+#ressources h2,
+#ressources p {
   text-align: center;
 }
