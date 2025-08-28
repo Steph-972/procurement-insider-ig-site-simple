@@ -24,4 +24,8 @@ html,body{margin:0;padding:0;background:var(--pi-bg);color:var(--pi-text);font-f
 .ig-btn{display:block;text-align:center;padding:14px 16px;border-radius:14px;border:1px solid var(--pi-primary);background:var(--pi-primary);color:#fff;text-decoration:none;font-weight:600}
 .ig-btn--outline{background:transparent;color:var(--pi-primary)}
 @media(max-width:780px){.grid--3{grid-template-columns:1fr}.hero{padding:40px 0}}
-#expertises h2{ text-align:center; }
+/* Titres centrés pour les sections de la home */
+#expertises h2,
+#ressources h2 {
+  text-align: center;
+}
